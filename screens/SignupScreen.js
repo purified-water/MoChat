@@ -9,16 +9,20 @@ function LoginScreen({ navigation }) {
     const [password, setPassword] = useState('');
 
     const handleSignup = async () => {
+        console.log('Signing up');
         if (email !== '' && password !== '') {
             createUserWithEmailAndPassword(auth, email, password)
-                .then(() => console.log('Sign up success'))
+                .then(() => {
+                    console.log('Sign up success');
+                    navigation.navigate('Login');
+                })
                 .catch(error => Alert.alert('Error', error.message));
 
         }
         else if (email === '' || password === '') {
             Alert.alert('Error', 'Email and password are required');
         }
-    } 
+    }
 
     return (
         <View style={styles.container}>

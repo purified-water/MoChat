@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState, createContext} from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
@@ -9,6 +9,12 @@ import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 
 const Stack = createStackNavigator();
+const AuthenticatedUserContext = createContext({});
+
+const AuthenticatedUserProvider = ({children}) => {
+  
+}
+
 
 function ChatStack() {
   return (
