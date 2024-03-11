@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet, FlatList, SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
+import Constants from 'expo-constants';
 import axios from 'axios';
-const apiKey = "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"
-const apiUrl = "https://api.openai.com/v1/chat/completions"
-import { MessageUser, MessageBot } from './MessageBox';
+const apiKey = Constants.expoConfig.extra.open_ai_api_key;
+const apiUrl = Constants.expoConfig.extra.open_ai_url;
+import { MessageUser, MessageBot } from '../components/MessageBox';
 const MoChat = () => {
     const [input, setInput] = useState('');
     const [messagesList, setMessagesList] = useState([
