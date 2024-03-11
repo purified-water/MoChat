@@ -1,9 +1,11 @@
 import React from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import MoChat from './screens/Chat'
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
+import MoChat from './screens/Chat'
+import LoginScreen from './screens/LoginScreen'
 
 const Stack = createStackNavigator();
 
@@ -15,10 +17,18 @@ function ChatStack() {
   ) 
 }
 
+function LoginStack() {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Login" component={LoginScreen}/>
+    </Stack.Navigator>
+  )
+}
+
 function RootNavigator() {
   return (
     <NavigationContainer>
-      <ChatStack/>
+      <LoginStack/>
     </NavigationContainer>
   )
 }
@@ -30,9 +40,5 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
 
-  },
 });

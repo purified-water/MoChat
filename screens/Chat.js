@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, FlatList, SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
-import Constants from 'expo-constants';
+import Constants from 'expo-constants'; 
 import axios from 'axios';
 
 const apiKey = Constants.expoConfig.extra.open_ai_api_key;
