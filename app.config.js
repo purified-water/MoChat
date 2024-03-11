@@ -1,4 +1,6 @@
-{
+import 'dotenv/config';
+
+export default {
   "expo": {
     "name": "MoChat",
     "slug": "MoChat",
@@ -25,6 +27,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      api_key: process.env.API_KEY,
+      auth_domain: process.env.AUTH_DOMAIN,
+      project_id: process.env.PROJECT_ID,
+      storage_bucket: process.env.STORAGE_BUCKET,
+      messaging_sender_id: process.env.MESSAGING_SENDER_ID,
+      app_id: process.env.APP_ID,
+      measurement_id: process.env.MEASUREMENT_ID,
+      open_ai_api_key: process.env.OPENAI_API_KEY,
+      open_ai_url: process.env.OPENAI_URL
     }
   }
 }
