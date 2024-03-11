@@ -2,9 +2,13 @@ import { View, Text, StyleSheet, FlatList, SafeAreaView, TouchableOpacity, TextI
 import React, { useState } from 'react';
 import Constants from 'expo-constants';
 import axios from 'axios';
+
 const apiKey = Constants.expoConfig.extra.open_ai_api_key;
 const apiUrl = Constants.expoConfig.extra.open_ai_url;
 import { MessageUser, MessageBot } from '../components/MessageBox';
+
+
+
 const MoChat = () => {
     const [input, setInput] = useState('');
     const [messagesList, setMessagesList] = useState([

@@ -36,8 +36,8 @@ export default {
       messaging_sender_id: process.env.MESSAGING_SENDER_ID,
       app_id: process.env.APP_ID,
       measurement_id: process.env.MEASUREMENT_ID,
-      open_ai_api_key: process.env.OPENAI_API_KEY,
-      open_ai_url: process.env.OPENAI_URL
+      open_ai_api_key: require('dotenv').config().parsed.OPENAI_API_KEY,
+      open_ai_url: require('dotenv').config().parsed.OPENAI_URL
     }
   }
 }
