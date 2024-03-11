@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, SafeAreaView, TouchableOpacity, Alert, Image, KeyboardAvoidingView } from 'react-native';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
 const background = require('../assets/purple-surface.png');
 
@@ -8,17 +8,17 @@ function LoginScreen({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = async () => {
+    const handleSignup = async () => {
         if (email !== '' && password !== '') {
-            signInWithEmailAndPassword(auth, email, password)
-                .then(() => console.log('Login success'))
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => console.log('Sign up success'))
                 .catch(error => Alert.alert('Error', error.message));
 
         }
         else if (email === '' || password === '') {
             Alert.alert('Error', 'Email and password are required');
         }
-    }
+    } 
 
     return (
         <View style={styles.container}>
@@ -27,7 +27,7 @@ function LoginScreen({ navigation }) {
 
             </View>
             <SafeAreaView style={styles.form}>
-                <Text style={styles.title}>Login</Text>
+                <Text style={styles.title}>Sign Up</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Enter email'
@@ -46,13 +46,13 @@ function LoginScreen({ navigation }) {
 
                 </TextInput>
                 <TouchableOpacity style={styles.button}>
-                    <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }} onPress={handleLogin}>Log in</Text>
+                    <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }} onPress={handleSignup}>Sign up</Text>
                 </TouchableOpacity>
 
                 <View style={{ flexDirection: 'row' }}>
-                    <Text>Don't have an account? </Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-                        <Text style={{ color: '#522687', fontWeight: 'bold' }}>Sign up</Text>
+                    <Text>Already have an account? </Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                        <Text style={{ color: '#522687', fontWeight: 'bold' }}>Log in</Text>
                     </TouchableOpacity>
                 </View>
 
