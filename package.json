@@ -23,7 +23,8 @@
     "react": "18.2.0",
     "react-native": "0.73.4",
     "react-native-gesture-handler": "~2.14.0",
-    "react-native-gifted-chat": "^2.4.0"
+    "react-native-gifted-chat": "^2.4.0",
+    "tokenizr": "^1.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
