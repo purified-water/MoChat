@@ -1,16 +1,45 @@
 import { View, Text, StyleSheet, FlatList, SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect, useEffect, useCallback } from 'react';
 import Constants from 'expo-constants'; 
 import axios from 'axios';
+import { collection, addDoc, orderBy, query, onSnapshot, serverTimestamp } from 'firebase/firestore'
+import { GiftedChat } from 'react-native-gifted-chat';
+import { auth, database } from '../../config/firebase'
 
 const apiKey = Constants.expoConfig.extra.open_ai_api_key;
 const apiUrl = Constants.expoConfig.extra.open_ai_url;
-import { MessageUser, MessageBot } from '../components/MessageBox';
+import { MessageUser, MessageBot } from '../../components/MessageBox';
+import { TokenOptimizer } from './TokenOptimizer';
 
+// Temporary test data
+const user = {
+    id: "flHKuqZwqsRCH28Zl352gq46gdE2",
+    mail: "admin@gmail.com",
+}
 
+/*
+Chat document structure:
+chat:
+    id: string
+    messages: [
+        {
+            role: string,
+            content: string
+            createdAt: timestamp
+        },
+        {
+            role: string,
+            content: string
+            createdAt: timestamp
+        }
+    ]
+    createdAt: timestamp
 
-const MoChat = () => {
+*/
+
+const MoChat = ({ navigation }) => {
     const [input, setInput] = useState('');
+    
     const [messagesList, setMessagesList] = useState([
         { type: 'bot', text: 'Hello! I am MoChat. How can I help you today?' },
         { type: 'user', text: 'I would like to know more about your products' }
@@ -18,11 +47,16 @@ const MoChat = () => {
     ]);
 
     const handleSend = async () => {
-        const prompt = input;
-        console.log('prompt', prompt);
+        const message = {
+            role: 'user',
+            content: input,
+            createdAt: serverTimestamp()
+        
+        };
+        // console.log('message', message);
         try {
             const response = await axios.post(apiUrl, {
-                messages: [{"role": "user", "content": `${prompt}`}],
+                messages: [{"role": "user", "content": `${message.content}`}],
                 model: 'gpt-3.5-turbo',
                 max_tokens: 1024,
                 temperature: 0.5
@@ -46,9 +80,18 @@ const MoChat = () => {
 
     }
 
+    useLayoutEffect(() => {
+        const collectionReference = collection(database, 'chats', 'chat_id');
+        // Show the messages in descending order by time
+        const query = query(collectionReference, orderBy('createdAt'), 'desc');
+
+
+
+    })
     return (
+        
         <SafeAreaView style={styles.container}>
-            <FlatList
+            {/* <FlatList
                 data={messagesList}
                 renderItem={({ item }) => {
                     if (item.type === 'user') {
@@ -72,8 +115,8 @@ const MoChat = () => {
                     onPress={handleSend}>
                     <Text>Send</Text>
                 </TouchableOpacity>
-            </View>
-
+            </View> */}
+            <GiftedChat/>
         </SafeAreaView>
     )
 }

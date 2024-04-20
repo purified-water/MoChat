@@ -4,9 +4,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import MoChat from './screens/Chat';
-import LoginScreen from './screens/LoginScreen';
-import SignupScreen from './screens/SignupScreen';
+import MoChat from './screens/ChatScreen/Chat';
+import LoginScreen from './screens/AuthenticationScreen/LoginScreen';
+import SignupScreen from './screens/AuthenticationScreen/SignupScreen';
 
 const Stack = createStackNavigator();
 const AuthenticatedUserContext = createContext({});
@@ -36,7 +36,10 @@ function LoginStack() {
 function RootNavigator() {
   return (
     <NavigationContainer>
-      <LoginStack/>
+      {/* <LoginStack/> */}
+      
+
+      <ChatStack/>
     </NavigationContainer>
   )
 }
